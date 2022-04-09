@@ -31,9 +31,7 @@ def garakli_list()->list:
 mini = 0
 garakdir = []
 
-
-def make_inline_pizza(call):
-    pass
+#print(BotUser.objects.get(chat_id = 1285748848, full_name = 'Muhammadjon Madaminov').chat_id)
 
 
 def make_inline_button(raqam, callbak, names):
@@ -72,7 +70,7 @@ def data_parsing(calldata:str)->list:
                 x += 1
             if x == b:
                 return i
-            
+
 
 def data_parsing_pizza(calldata:str)->list:
     pars = calldata.split(',')
@@ -87,6 +85,9 @@ def data_parsing_pizza(calldata:str)->list:
     z.append(h)
     z.append(data_parsing(calldata))
     return z
+
+#print(data_parsing_pizza('Pizza,8'))
+
 
 def data_parsing_ichimlik(calldata:str)->list:
     pars = calldata.split(',')
