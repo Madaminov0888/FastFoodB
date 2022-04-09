@@ -21,6 +21,8 @@ def til_tanlash(message):
     made1 = types.InlineKeyboardButton(text = '🇷🇺 Русский', callback_data='rus_tili')
     made2 = types.InlineKeyboardButton(text = "🇺🇿 O'zbek tili", callback_data='menu_start')
     made.add(made1, made2)
+    if message.text != '/start':
+        bot.delete_message(chat_id = message.chat.id, message_id = message.id)
     bot.send_message(chat_id=message.chat.id, text = text, reply_markup=made)
 
 
@@ -96,6 +98,10 @@ def menu_ruscha(message, SAVAT):
     caption=text,
     reply_markup=mark
     )
+    try:
+        bot.delete_message(chat_id = message.chat.id, message_id = message.id)
+    except:
+        pass
     file.close()
 
 
@@ -171,8 +177,12 @@ def turkcha_pizza_ru(call):
     file.close()
 
 
-def savat_ru(call, SAVAT):
+
+
+
+def savat_ru(call, SAVAT:list):
     s = SAVAT
+    cpy = s.copy()
     umumiy_summa = 0
     text = '''📦 Корзина\n\n''' 
     se = 1
@@ -181,23 +191,33 @@ def savat_ru(call, SAVAT):
     made1 = types.InlineKeyboardButton(text='✅ Заказать', callback_data='buyurtma_berish')
     made.add(made1, row_width=1)
     for i in s:
+        xs = 0
         if i[-1] == call.message.chat.id:
             yanam_h.append(i[0])
+            for j in cpy:
+                if i[0][0][0] == j[0][0][0] and i[0][2] == j[0][2]:
+                    xs += 1
+                    if xs >= 2:
+                        i[0][-2] += int(j[0][-2])
+                        s.pop(cpy.index(j))
+                        cpy.pop(cpy.index(j))
     buttons = []
     if len(yanam_h) > 0: 
         for i in yanam_h:
             turi = ''
             if i[2] == 'Hotdog' and len(i[0][0].split(' ')) < 2 and not '-' in i[0][0] and i[0][0] != 'Haggi':
                 turi = 'Хот-Дог'
+            elif i[2] == 'Pizza':
+                turi = 'Пицца'
             narx = str(int(i[-2])*int(i[4]))
-            text += f'''{STICKERS_DICT[i[2]]}<b>{i[0][-1]} {turi}</b> x{i[-2]}:\n   {i[-2]}x{str(i[4])[:-3]}.{str(i[4])[-3:]} = {narx[:-3]}.{narx[-3:]} cум\n\n'''
+            text += f'''{STICKERS_DICT[i[2]]}<b>{i[0][-1]} {turi}</b> x{i[-2]}:\n   {i[-2]}x{str(i[4])[:-3]}.{str(i[4])[-3:]} = {narx[:-3]}.{narx[-3:]} \n\n'''
             sd = types.InlineKeyboardButton(text = f'❌ {i[0][-1]} {turi}', callback_data=f'$ochirish_{se}')
             buttons.append(sd)
             se += 1
             umumiy_summa += int(i[-2])*int(i[4])
         if len(yanam_h) > 1:
             made.add(*buttons, row_width=1)
-        text += 'Обшый сумма: '+str(umumiy_summa)[:-3]+'.' + str(umumiy_summa)[-3:]+" cум"
+        text += 'Обшый сумма: '+str(umumiy_summa)[:-3]+'.' + str(umumiy_summa)[-3:]
         made2 = types.InlineKeyboardButton(text = '🗑 Очистить корзину', callback_data='clear_savat')
         menu = types.InlineKeyboardButton(text = '📋 Menu', callback_data= 'menu')
         made.add(made2, menu, row_width=1)
@@ -216,7 +236,7 @@ def savat_ru(call, SAVAT):
 
 def savatga_qoshish_ru(call, test, SAVAT):
     kal_main = test.split('.')
-    soni, data = kal_main[2], kal_main[1]
+    soni, data = int(kal_main[2]), kal_main[1]
     data_pizza = data.split(',')[0]
     if data_pizza == 'Pizza':
         mini_ish = tools.poisk_pizza(data)
@@ -234,7 +254,7 @@ def savatga_qoshish_ru(call, test, SAVAT):
     #menu = types.InlineKeyboardButton(text = 'Menu', callback_data= 'menu')
     #savat = types.InlineKeyboardButton(text='🛒 Savat', callback_data='Savat')
     #made.add(menu, savat)
-    text = f'''✅ Добовлено\n{mini_ish[0][-1]} x{mini_ish[-2]} - {str(mini_ish[4])[:-3]}.{str(mini_ish[4])[-3:]} сум\nПродолжим? 🤗 '''
+    text = f'''✅ Добовлено\n{mini_ish[0][-1]} x{mini_ish[-2]} - {str(mini_ish[4])[:-3]}.{str(mini_ish[4])[-3:]}\nПродолжим? 🤗 '''
     bot.answer_callback_query(call.id, text = text, show_alert=True)
     return edit_menu_ruscha(call, SAVAT=SAVAT)
 
@@ -534,9 +554,11 @@ def after_location_ru(message, SAVAT, ZAKAZLAR):
     contact_id = 0
     re = 0
     for i in ZAKAZLAR:
-        if i[-1] == message.chat.id:
-            contact_id = i[0]
-            re += 1
+        if i[-2] == message.chat.id:
+            contact_id = i[-1]
+            location_id = i[0]
+            if len(i) > 2:
+                re += 1
     se = 1
     yanam_h = []
     for i in SAVAT:
@@ -545,24 +567,74 @@ def after_location_ru(message, SAVAT, ZAKAZLAR):
     text1 = f'BUYURTMA\n{message.from_user.full_name}\n'
     umumiy_summa = 0
     for i in yanam_h:
-        text1 += f'''{se}.{i[0][0]}---[{i[-2]} dona] ->{int(i[-2])*int(i[4])}\n'''
+        text1 += f'''{se}.{i[0][0]} {i[2]} (x{i[-2]})\n  {int(i[-2])*int(i[4])}\n'''
         se += 1
         umumiy_summa += int(i[-2])*int(i[4])
-    text1 += 'Umumiy narx-->'+str(umumiy_summa)
+    text1 += '\nUmumiy narx = '+str(umumiy_summa)[:-3] + '.' + str(umumiy_summa)[-3:]
     if re != 0:
-        text1 += '\nYetkazib beriladi'
+        text1 += '\n<i>Yetkazib beriladi</i>'
         bot.send_message(chat_id=-634542393, text = text1)
-        bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=message.id)
+        bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=location_id)
         bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=contact_id)
     else:
-        text1 += '\nKelib olib ketiladi'
+        text1 += '\n<i>Kelib olib ketiladi</i>'
         bot.send_message(chat_id=-634542393, text = text1)
-        bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=message.id)
-    text = 'Ваш заказ принят'
+        bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=contact_id)
+    text = '✅ Ваш заказ принят'
     made = types.ReplyKeyboardRemove()
+    bot.delete_message(chat_id=message.chat.id, message_id=message.id)
     bot.send_message(chat_id=message.chat.id, text = text, reply_markup=made)
+    for u in ZAKAZLAR:
+            if u[1] == message.chat.id:
+                ZAKAZLAR.pop(ZAKAZLAR.index(u))
+                break
     return menu_ruscha(message, SAVAT=SAVAT)
     
+
+def tasdiqlash_ru(message, SAVAT, ZAKAZLAR):
+    re = 0
+    contact = 0
+    location = 0
+    for i in ZAKAZLAR:
+        if i[-1] == message.chat.id:
+            phone = message.contact.phone_number
+            contact = message.id
+            location = i[0]
+            i.append(message.id)
+            re += 1
+            break
+    else:
+        phone = message.contact.phone_number
+        ZAKAZLAR.append([message.chat.id, message.id])
+    
+    yanam_h = []
+    for i in SAVAT:
+        if i[-1] == message.chat.id:
+            yanam_h.append(i[0])
+    text = f'BUYURTMA\n'
+    umumiy_summa = 0
+    for i in yanam_h:
+        turi = ''
+        if i[2] == 'Hotdog' and len(i[0][0].split(' ')) < 2 and not '-' in i[0][0] and i[0][0] != 'Haggi':
+            turi = 'Хот-Дог'
+        elif i[2] == 'Pizza':
+            turi = 'Пицца'
+        narx = str(int(i[-2])*int(i[4]))
+        text += f'''{STICKERS_DICT[i[2]]}<b>{i[0][-1]} {turi}</b> (x{i[-2]}):\n └ {i[-2]}x{str(i[4])[:-3]}.{str(i[4])[-3:]} = {narx[:-3]}.{narx[-3:]} \n\n'''
+        umumiy_summa += int(narx)
+    text += '\n<b>Обшый сумма:</b> '+str(umumiy_summa)[:-3] + '.' + str(umumiy_summa)[-3:]
+    text += '\n<b>Тип доставки:</b>'
+    if re != 0:
+        text += '🚚 Доставка'
+    else:
+        text += '🚶 Прийти и взять'
+    text += f'\n<b>Номер телефона</b>: +{phone}'
+    mark = types.InlineKeyboardMarkup(row_width=1)
+    mark1 = types.InlineKeyboardButton(text = '✅ Подтверждать', callback_data='tasdiqlash_menu')
+    mark2 = types.InlineKeyboardButton(text = '❌ Отменить', callback_data='bekor_menu')
+    mark.add(mark1, mark2)
+    bot.send_message(chat_id = message.chat.id, text = text, reply_markup=mark)
+
 
 
 def before_location_ru(message, ZAKAZLAR):
