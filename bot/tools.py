@@ -193,3 +193,4 @@ def orqaga_tugmalari_ru(call, callbak:str):
         return ichimliklar_special_ru(call, 2, need)
     elif a == 'Frie':
         return fri_qism(call)
+    

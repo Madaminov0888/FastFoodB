@@ -232,8 +232,9 @@ def inli(call, LANG=LANG):
 
 
 def yetkazib_berish(call):
-    text = '''🚕 Siz yetkazib berish bolimini tanladingiz
-<i>Sizga buyurtmangizni yetkazib berish uchun uzingizning geolakatsiayangizni yuboring</i>'''
+    text = '''🚚 Siz yetkazib berish xizmatini tanladingiz.
+
+Manzilingizga buyurtma yetkazib berilishi uchun "📍<b>Geolokatsiyani jo'natish</b>" tugmasini bosing.'''
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
     key0 = types.KeyboardButton(text = "📍 Manzilni qo'lda kiritish", )
     key1 = types.KeyboardButton(text = '📍 Manzil', request_location=True)
@@ -243,7 +244,7 @@ def yetkazib_berish(call):
 
 
 def buyurtma_bolimi(call):
-    text = 'Buyurtmani qanday olmoqchisiz??'
+    text = 'Buyurtmani qanday olmoqchisiz?'
     made = types.InlineKeyboardMarkup()
     made1 = types.InlineKeyboardButton(text = '🚚 Yetkazib berish', callback_data='yetkazib_berish')
     made2 = types.InlineKeyboardButton(text = '🚶 Kelib olib ketish', callback_data='olib_ketish')
@@ -599,7 +600,7 @@ def tasdiqlash(message):
     for i in SAVAT:
         if i[-1] == message.chat.id:
             yanam_h.append(i[0])
-    text = f'BUYURTMA\n'
+    text = f'<b>BUYURTMANGIZ:</b>\n\n'
     umumiy_summa = 0
     for i in yanam_h:
         turi = ''
