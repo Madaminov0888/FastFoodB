@@ -2,6 +2,7 @@ import telebot
 import config
 import tools
 from telebot import types
+from bot.main import PATH
 from bot.main import *
 
 TOKEN = '5209072169:AAHIkqoHNC38dOAaAJVe9y9siKOGGYa5pVc'
@@ -26,7 +27,7 @@ def turkcha_pizza(call):
             names.append(a[i][0][0])
             #text += str(son) + f'. {a[i][0][0]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/turkcha.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/turkcha.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -45,7 +46,7 @@ def doner_qismi(call):
             son += 1
             #text += str(son) + f'. {a[i][0][0]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/doner.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/doner.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -65,7 +66,7 @@ def kebab_qismi(call):
             son += 1
             #text += str(son) + f'. {a[i][0][0]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/kebab.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/kebab.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -84,7 +85,7 @@ def lavash_qism(call):
             son += 1
             #text += str(son) + f'. {a[i][0][0]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/lavash.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/lavash.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -104,7 +105,7 @@ def chiz_qismi(call):
             names.append(a[i][0][0])
             #text += str(son) + f'. {a[i][0][0]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/burger.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/burger.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -128,7 +129,7 @@ def hotdogqismi(call):
                 names.append(a[i][0][0])
             #text += str(son) + f'. {a[i][0][0]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/hotdog.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/hotdog.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -147,7 +148,7 @@ def pizzaqismi(call):
             names.append(a[i][0][0])
             #text += str(son) + f'. {a[i][0][0]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/pizza.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/pizza.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -166,7 +167,7 @@ def ichimlikqismi(call):
             son += 1
             #text += str(son) + f'. {a[i][0][0]} ---{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/ich.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/ich.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -185,7 +186,7 @@ def fri_qism(call):
             son += 1
             #text += str(son) + f'. {a[i][0][0]} ---{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/frie.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/frie.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()

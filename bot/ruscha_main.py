@@ -92,7 +92,7 @@ def menu_ruscha(message, SAVAT):
     mark.add(mark4, mark1, mark2, mark3, mark6, mark01, mark5, mark8, mark9, row_width=2)
     mark.add(savat, mark7, row_width=1)
     text = f'😋 Что хотите заказать?'
-    file = open('fastfoodphotos/maxsusfastfood.png', 'rb')
+    file = open(PATH +'fastfoodphotos/maxsusfastfood.png', 'rb')
     bot.send_photo(message.chat.id,
     file,
     caption=text,
@@ -108,8 +108,9 @@ def menu_ruscha(message, SAVAT):
 
 
 def yetkazib_berish_ru(call):
-    text = '''🚕 Вы выбрали службу доставки.
-<i>Теперь отправьте свою геолокацию👇</i>'''
+    text = '''🚚 Вы выбрали службу доставки.
+
+Нажмите кнопку "<b>📍Отправить геолокацию</b>", чтобы ваш заказ был доставлен на ваш адрес.'''
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
     #key1 = types.KeyboardButton(text = '📍 Number',request_contact=True)
     key0 = types.KeyboardButton(text = "📍 Ввести адрес вручную", )
@@ -120,13 +121,13 @@ def yetkazib_berish_ru(call):
 
 
 def buyurtma_bolimi_ru(call):
-    text = 'Как вы хотите разместить заказ??'
+    text = 'Как вы хотите разместить заказ?'
     made = types.InlineKeyboardMarkup()
     made1 = types.InlineKeyboardButton(text = '🚚 Доставка', callback_data='yetkazib_berish')
     made2 = types.InlineKeyboardButton(text = '🚶 Прийти и взять', callback_data='olib_ketish')
     menu = types.InlineKeyboardButton(text = '📋 Меню', callback_data= 'menu')
     made.add(made1, made2, menu, row_width=1)
-    file = open('fastfoodphotos/maxsusfastfood.png', 'rb')
+    file = open(PATH +'fastfoodphotos/maxsusfastfood.png', 'rb')
     bot.delete_message(chat_id=call.message.chat.id, message_id = call.message.id)
     bot.send_photo(chat_id = call.message.chat.id, photo = file, caption= text,reply_markup=made)
 
@@ -171,7 +172,7 @@ def turkcha_pizza_ru(call):
             #text += str(son) + f'. {a[i][0][-1]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
     text += f"Категория: <b>🍛 Пиде</b>"
-    file = open('fastfoodphotos/turkcha.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/turkcha.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -371,7 +372,7 @@ def edit_menu_ruscha(call, SAVAT):
     mark.add(mark4, mark1, mark2, mark3, mark6, mark01,mark5,mark8, mark9, row_width=2)
     mark.add(savat, mark7, row_width=1)
     text = '😋 Что хотите заказать?'
-    file = open('fastfoodphotos/maxsusfastfood.png', 'rb')
+    file = open(PATH +'fastfoodphotos/maxsusfastfood.png', 'rb')
     bot.delete_message(chat_id=call.message.chat.id, message_id = call.message.id)
     bot.send_photo(chat_id = call.message.chat.id, photo = file, caption = text, reply_markup=mark)
     file.close()
@@ -390,7 +391,7 @@ def doner_qismi_ru(call):
             #text += str(son) + f'. {a[i][0][-1]} - {narx[:-3]}.{narx[-3:]} сум\n'
     tools.make_inline_button(son, c, names)
     text += f"Категория:🥙 <b>Донер</b>"
-    file = open('fastfoodphotos/doner.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/doner.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -409,7 +410,7 @@ def fri_qism_ru(call):
             son += 1
             #text += str(son) + f'. {a[i][0][0]} ---{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/frie.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/frie.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -428,7 +429,7 @@ def kebab_qismi_ru(call):
             #text += str(son) + f'. {a[i][0][-1]}--{a[i][4]}\n'
     tools.make_inline_button(son, c, names)
     text += f"Категория:🥘 <b>Кебаб</b>"
-    file = open('fastfoodphotos/kebab.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/kebab.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -446,7 +447,7 @@ def lavash_qism_ru(call):
             #text += str(son) + f'. {a[i][0][-1]} - {a[i][4]}\n'
     tools.make_inline_button(son, c, names)
     text += "Категория: 🌯 <b>Лаваш</b>"
-    file = open('fastfoodphotos/lavash.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/lavash.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -465,7 +466,7 @@ def chiz_qismi_ru(call):
             #text += str(son) + f'. {a[i][0][-1]}--{a[i][4]}\n'
     tools.make_inline_button(son, c, names)
     text += "Категория: 🍔 <b>Бургер</b>"
-    file = open('fastfoodphotos/burger.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/burger.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -488,7 +489,7 @@ def hotdogqismi_ru(call):
             #text += str(son) + f'. {a[i][0][-1]}--{a[i][4]}\n'
     text += "Категория: 🌭 <b>Xoт-Дoг</b>"
     tools.make_inline_button(son, c, names)
-    file = open('fastfoodphotos/hotdog.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/hotdog.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -507,7 +508,7 @@ def pizzaqismi_ru(call):
             #text += str(son) + f'. {a[i][0][-1]}--{narx[:-3]}.{narx[-3:]}\n'
     tools.make_inline_button(son, c, names)
     text += "Категория: 🍕<b>Пицца</b>"
-    file = open('fastfoodphotos/pizza.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/pizza.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
@@ -525,14 +526,15 @@ def ichimlikqismi_ru(call):
             #text += str(son) + f'. {a[i][0][-1]}----{a[i][4]}\n'
     tools.make_inline_button(son, c, names)
     text += "Категория:🍹 <b>Напитки</b>"
-    file = open('fastfoodphotos/ich.jpg', 'rb')
+    file = open(PATH +'fastfoodphotos/ich.jpg', 'rb')
     bot.edit_message_media(types.InputMedia(type='photo', media=file), chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     bot.edit_message_caption(caption=text, chat_id= call.message.chat.id, message_id= call.message.id, reply_markup=tools.mini)
     file.close()
 
 def olib_ketish_ru(call):
-    text = '''Вы выбрали тип самовывоза, 
-пожалуйста, оставьте свой номер телефона'''
+    text = '''🚶 Вы выбрали тип самовывоза,
+
+Отправьте нам свой номер телефона, чтобы мы могли связаться с вами👇 '''
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
     key1 = types.KeyboardButton(text = '📲 Номер телефона', request_contact=True)
     key2 = types.KeyboardButton(text = 'Меню')
@@ -540,7 +542,7 @@ def olib_ketish_ru(call):
     bot.send_message(chat_id=call.message.chat.id, text=text, reply_markup=key)
 
 def yana_bir_gemaroy_ru(message):
-    text = 'Пожалуйста, пришлите свой адрес в виде полного сообщения\nНапример: название улицы, номер дома и популярное общественное место рядом с вашим домом.'
+    text = '📍 Пожалуйста, пишите свой адрес в виде полного сообщения\n\n<b>Например</b>: название улицы, номер дома и популярное общественное место рядом с вашим домом.'
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
     key2 = types.KeyboardButton(text = 'Menu')
     key.add(key2)
@@ -611,7 +613,7 @@ def tasdiqlash_ru(message, SAVAT, ZAKAZLAR):
     for i in SAVAT:
         if i[-1] == message.chat.id:
             yanam_h.append(i[0])
-    text = f'BUYURTMA\n'
+    text = f'<b>ВАШ ЗАКАЗ:</b>\n'
     umumiy_summa = 0
     for i in yanam_h:
         turi = ''
@@ -622,7 +624,7 @@ def tasdiqlash_ru(message, SAVAT, ZAKAZLAR):
         narx = str(int(i[-2])*int(i[4]))
         text += f'''{STICKERS_DICT[i[2]]}<b>{i[0][-1]} {turi}</b> (x{i[-2]}):\n └ {i[-2]}x{str(i[4])[:-3]}.{str(i[4])[-3:]} = {narx[:-3]}.{narx[-3:]} \n\n'''
         umumiy_summa += int(narx)
-    text += '\n<b>Обшый сумма:</b> '+str(umumiy_summa)[:-3] + '.' + str(umumiy_summa)[-3:]
+    text += '\n<b>Итого:</b> '+str(umumiy_summa)[:-3] + '.' + str(umumiy_summa)[-3:]
     text += '\n<b>Тип доставки:</b>'
     if re != 0:
         text += '🚚 Доставка'
@@ -638,8 +640,9 @@ def tasdiqlash_ru(message, SAVAT, ZAKAZLAR):
 
 
 def before_location_ru(message, ZAKAZLAR):
-    text = '''📍 Ваш адрес успешно отправлен.
-<i>Теперь отправьте свой номер телефона👇</i>'''
+    text = '''✅ Ваш адрес введен.
+
+Отправьте нам свой номер телефона, чтобы мы могли связаться с вами👇'''
     ZAKAZLAR.append([message.id, message.chat.id])
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
     key3 = types.KeyboardButton(text = '📲 Отправить номер телефона',request_contact=True)

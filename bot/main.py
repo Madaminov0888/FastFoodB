@@ -18,7 +18,13 @@ SAVAT = []
 LANG = []
 SPECIPIC_ID=-634542393
 ZAKAZLAR = []
+i = 0
 STICKERS_DICT = {'Lavash':'🌯 ', 'Chizburger': '🍔 ', 'Hotdog':'🌭 ', 'Pizza' : '🍕', 'Ichimliklar': '🍹', 'Frie':'🍟 ', 'Kavob':'🥘 ', 'Doner':'🥙 ', 'TurkchaPitsa':'🍛 '}
+if i == 1:
+    PATH = '/home/madaminov0888/fastfood/'  ## server ga qoyishda file dir ni o'zartiring
+else:
+    PATH = ''
+
 
 
 @bot.message_handler(commands=['start'])
@@ -68,7 +74,7 @@ def menu(message):
     mark.add(mark4, mark1, mark2, mark3, mark01,mark6, mark5, mark8, mark9,row_width=2)
     mark.add(savat, mark7, row_width=1)
     text = f'😋 Nima buyurtma bermoqchisiz?'
-    file = open('fastfoodphotos/maxsusfastfood.png', 'rb')
+    file = open(PATH + 'fastfoodphotos/maxsusfastfood.png', 'rb')
     bot.send_photo(message.chat.id,
     file,
     caption=text,
@@ -237,7 +243,7 @@ def yetkazib_berish(call):
 Manzilingizga buyurtma yetkazib berilishi uchun "📍<b>Geolokatsiyani jo'natish</b>" tugmasini bosing.'''
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
     key0 = types.KeyboardButton(text = "📍 Manzilni qo'lda kiritish", )
-    key1 = types.KeyboardButton(text = '📍 Manzil', request_location=True)
+    key1 = types.KeyboardButton(text = "📍 Geolokatsiyani jo'natish", request_location=True)
     key2 = types.KeyboardButton(text = '📋 Menu')
     key.add(key1, key0, key2)
     bot.send_message(chat_id=call.message.chat.id, text=text, reply_markup=key)
@@ -247,10 +253,10 @@ def buyurtma_bolimi(call):
     text = 'Buyurtmani qanday olmoqchisiz?'
     made = types.InlineKeyboardMarkup()
     made1 = types.InlineKeyboardButton(text = '🚚 Yetkazib berish', callback_data='yetkazib_berish')
-    made2 = types.InlineKeyboardButton(text = '🚶 Kelib olib ketish', callback_data='olib_ketish')
+    made2 = types.InlineKeyboardButton(text = '🚶 Olib ketish', callback_data='olib_ketish')
     menu = types.InlineKeyboardButton(text = '📋 Menu', callback_data= 'menu')
     made.add(made1, made2, menu, row_width=1)
-    file = open('fastfoodphotos/maxsusfastfood.png', 'rb')
+    file = open(PATH + 'fastfoodphotos/maxsusfastfood.png', 'rb')
     #bot.edit_message_caption(caption=text, chat_id=call.message.chat.id, message_id=call.message.id, reply_markup=made)
     bot.delete_message(chat_id=call.message.chat.id, message_id = call.message.id)
     bot.send_photo(chat_id = call.message.chat.id, photo = file, caption= text,reply_markup=made)
@@ -430,7 +436,7 @@ def ichimliklar_special(call, r, calldata):
     satr = ''
     for i in main_ish[0]:
         if main_ish[1][0][0].split(' ')[0] in ['Fanta','Koka-Kola', 'Pepsi']:
-            file = open('fastfoodphotos/kola.jpg', 'rb')
+            file = open(PATH +'fastfoodphotos/kola.jpg', 'rb')
             if i == 'Katta':
                 satr = '1 Litrlik'
             elif i == "O'rtacha":
@@ -438,7 +444,7 @@ def ichimliklar_special(call, r, calldata):
             elif i == 'Maxsus':
                 satr = '1.5 Litrlik'
         elif main_ish[1][0][0].split(' ')[0] == 'Kofe':
-            file = open('fastfoodphotos/kofe.jpg', 'rb')
+            file = open(PATH +'fastfoodphotos/kofe.jpg', 'rb')
             if i == 'Katta':
                 satr = 'Qora kofe'
             elif i == 'Maxsus':
@@ -446,7 +452,7 @@ def ichimliklar_special(call, r, calldata):
             elif i == "O'rtacha":
                 satr = 'Sutli Kofe'
         else:
-            file = open('fastfoodphotos/choy.jpg', 'rb')
+            file = open(PATH +'fastfoodphotos/choy.jpg', 'rb')
             if i == 'Katta':
                 satr = 'Qora choy'
             elif i == 'Maxsus':
@@ -522,7 +528,7 @@ def edit_menu(call):
     mark.add(mark4, mark1, mark2, mark3, mark01,mark6, mark5, mark8, mark9,row_width=2)
     mark.add(savat, mark7, row_width=1)
     text = '😋 Nima buyurtma bermoqchisiz?'
-    file = open('fastfoodphotos/maxsusfastfood.png', 'rb')
+    file = open(PATH +'fastfoodphotos/maxsusfastfood.png', 'rb')
     bot.delete_message(chat_id=call.message.chat.id, message_id = call.message.id)
     bot.send_photo(chat_id = call.message.chat.id, photo = file, caption = text, reply_markup=mark)
     file.close()
@@ -531,10 +537,11 @@ def edit_menu(call):
 
 
 def olib_ketish(call):
-    text = '''Siz olib ketish turini tanladingiz
-    Iltimos telefon raqamingizni qoldiring'''
+    text = '''🚶 Siz olib ketish turini tanladingiz.
+
+Siz bilan bog'lanishimiz uchun, telefon raqamingizni jo'nating👇'''
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
-    key1 = types.KeyboardButton(text = '📲 Telefon raqam', request_contact=True)
+    key1 = types.KeyboardButton(text = "📲 Telefon raqamni jo'natish", request_contact=True)
     key2 = types.KeyboardButton(text = 'Menu')
     key.add(key1, key2)
     bot.send_message(chat_id=call.message.chat.id, text=text, reply_markup=key)
@@ -561,7 +568,7 @@ def keybord(message):
             return before_location(message)
 
 def yana_bir_gemaroy(message):
-    text = 'Iltimos manzilingizni toliq xabar shaklida yuboring\nMasalan: Kocha nomi, uy nomeri va uyingiz yaqinidagi mashhur jamoat joyi'
+    text = '''Iltimos manzilingizni to'liq xabar shaklida yuboring\n\n<b>Masalan</b>: Ko'cha nomi, uy raqami va uyingiz yaqinida joylashgan mashhur jamoat joyi'''
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
     key2 = types.KeyboardButton(text = 'Menu')
     key.add(key2)
@@ -682,11 +689,12 @@ def ajibuju(message):
         return before_location(message)
 
 def before_location(message):
-    text = '''🚕 Siz yetkazib berish bolimini tanladingiz
-<i>Sizga buyurtmani yetkazish uchun telefon raqamingizni yuboring</i>'''
+    text = '''✅ Manzilingiz kirtildi.
+
+Siz bilan bog'lanishimiz uchun, telefon raqamingizni jo'nating👇'''
     ZAKAZLAR.append([message.id, message.chat.id])
     key = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1, one_time_keyboard=True)
-    key3 = types.KeyboardButton(text = '📍 Number',request_contact=True)
+    key3 = types.KeyboardButton(text = "📲 Telefon raqamni jo'natish",request_contact=True)
     #key3 = types.KeyboardButton(text = '📍Location', request_location=True)
     key2 = types.KeyboardButton(text = 'Menu')
     key.add(key3, key2)
