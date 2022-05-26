@@ -148,25 +148,25 @@ def orqaga_tugmalari(call, callbak:str):
     kall = callbak.split(',')
     need = kall[0]+','+kall[1]
     if a == 'Pizza' and int(kall[1]) == 2:
-        return pizzaqismi(call)
+        return pizzaqismi(call, PATH)
     elif a == 'Pizza':
         return pizza_special(call, 2, need)
     elif a == 'TurkchaPitsa':
-        return turkcha_pizza(call)
+        return turkcha_pizza(call, PATH)
     elif a == 'Doner':
-        return doner_qismi(call)
+        return doner_qismi(call, PATH)
     elif a == 'Chizburger':
-        return chiz_qismi(call)
+        return chiz_qismi(call, PATH)
     elif a == 'Kavob':
-        return kebab_qismi(call)
+        return kebab_qismi(call, PATH)
     elif a == 'Lavash':
-        return lavash_qism(call)
+        return lavash_qism(call, PATH)
     elif a == 'Hotdog':
-        return hotdogqismi(call)
+        return hotdogqismi(call, PATH)
     elif a == 'Ichimliklar':
         return ichimliklar_special(call, 2, need)
     elif a == 'Frie':
-        return fri_qism(call)
+        return fri_qism(call, PATH)
     
 
 def orqaga_tugmalari_ru(call, callbak:str):
@@ -192,5 +192,5 @@ def orqaga_tugmalari_ru(call, callbak:str):
     elif a == 'Ichimliklar':
         return ichimliklar_special_ru(call, 2, need)
     elif a == 'Frie':
-        return fri_qism(call)
+        return fri_qism_ru(call)
     
