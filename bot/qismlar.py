@@ -4,10 +4,9 @@ import tools
 from telebot import types
 from bot.main import *
 
-TOKEN = '5209072169:AAHIkqoHNC38dOAaAJVe9y9siKOGGYa5pVc'
 
 bot = telebot.TeleBot(
-    token=TOKEN,
+    token=config.TOKEN,
     parse_mode='HTML',
     num_threads=4,
 )

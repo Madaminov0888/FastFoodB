@@ -16,3 +16,4 @@ sys.path.append(APP_DIR_PATH)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fastfood.settings')
 django.setup()
 
+TOKEN = '5163808896:AAHkDP8YjPO-KXROVq1y0eoXFwwwpNn0sZ4'

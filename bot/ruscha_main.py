@@ -5,6 +5,7 @@ import tools
 from telebot import types
 from bot.main import STICKERS_DICT
 from bot.main import *
+from bot.main import SPECIPIC_ID
 
 TOKEN = '5209072169:AAHIkqoHNC38dOAaAJVe9y9siKOGGYa5pVc'
 
@@ -634,9 +635,9 @@ def after_location_ru(message, SAVAT, ZAKAZLAR):
         extended = """🚚 Ваш заказ будет доставлен по указанному адресу в течение 40 минут. 
 Мы свяжемся с вами в ближайшее время..."""
         text1 += '\n<i>Yetkazib beriladi</i>'
-        bot.send_message(chat_id=-634542393, text = text1)
-        bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=location_id)
-        bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=contact_id)
+        bot.send_message(chat_id=SPECIPIC_ID, text = text1)
+        bot.forward_message(chat_id=SPECIPIC_ID, from_chat_id=message.chat.id, message_id=location_id)
+        bot.forward_message(chat_id=SPECIPIC_ID, from_chat_id=message.chat.id, message_id=contact_id)
     else:
         text1 += '\n<i>Kelib olib ketiladi</i>'
         extended = "⏳ Ваш заказ будет готов через 30 минут. Мы свяжемся с вами в ближайшее время..."

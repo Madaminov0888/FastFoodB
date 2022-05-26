@@ -7,16 +7,16 @@ import tools
 from telebot import types
 
 
-TOKEN = '5209072169:AAHIkqoHNC38dOAaAJVe9y9siKOGGYa5pVc'
+
 
 bot = telebot.TeleBot(
-    token=TOKEN,
+    token=config.TOKEN,
     parse_mode='HTML',
     num_threads=4,
 )
 SAVAT = []
 LANG = []
-SPECIPIC_ID=-634542393
+SPECIPIC_ID=-700156247
 ZAKAZLAR = []
 i = 0
 STICKERS_DICT = {'Lavash':'🌯 ', 'Chizburger': '🍔 ', 'Hotdog':'🌭 ', 'Pizza' : '🍕', 'Ichimliklar': '🍹', 'Frie':'🍟 ', 'Kavob':'🥘 ', 'Doner':'🥙 ', 'TurkchaPitsa':'🍛 '}
@@ -685,9 +685,9 @@ def after_location(message):
     if re != 0:
         text1 += '\n<i>Yetkazib beriladi</i>'
         extended = "🚚 Buyurtmangiz 40 daqiqa ichida aytilgan manzilga yetkazib beriladi. Tez orada siz bilan bog'lanamiz..."
-        bot.send_message(chat_id=-634542393, text = text1)
-        bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=location_id)
-        bot.forward_message(chat_id=-634542393, from_chat_id=message.chat.id, message_id=contact_id)
+        bot.send_message(chat_id=SPECIPIC_ID, text = text1)
+        bot.forward_message(chat_id=SPECIPIC_ID, from_chat_id=message.chat.id, message_id=location_id)
+        bot.forward_message(chat_id=SPECIPIC_ID, from_chat_id=message.chat.id, message_id=contact_id)
         for u in ZAKAZLAR:
             if u[1] == message.chat.id:
                 ZAKAZLAR.pop(ZAKAZLAR.index(u))
