@@ -7,7 +7,7 @@ from bot.main import STICKERS_DICT
 from bot.main import *
 from bot.main import SPECIPIC_ID
 
-TOKEN = '5209072169:AAHIkqoHNC38dOAaAJVe9y9siKOGGYa5pVc'
+TOKEN = '5163808896:AAHkDP8YjPO-KXROVq1y0eoXFwwwpNn0sZ4'
 
 bot = telebot.TeleBot(
     token=TOKEN,

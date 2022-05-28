@@ -36,7 +36,7 @@ def aloqa(message):
     mark.add(menu, row_width=1)
     bot.send_message(chat_id=message.chat.id, text = text, reply_markup=mark)
 
-@bot.message_handler(commands=['start', 'tilni_ozgartirish'])
+@bot.message_handler(commands=['start', 'til'])
 def til_tanlash(message):
     try:
         user, s = BotUser.objects.update_or_create(chat_id = message.chat.id, full_name = message.from_user.full_name)
